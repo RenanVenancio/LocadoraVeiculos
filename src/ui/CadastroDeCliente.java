@@ -198,9 +198,26 @@ public class CadastroDeCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Cliente cli = new Cliente(txtNome.getText(), txtId.getText(), txtEndereco.getText(), txtTelefone.getText());
-        lblIndice.setText(String.valueOf(LocadoraDados.getClientes().size()));
-        LocadoraDados.cadastraCliente(cli);
+        Cliente cli = new Cliente();
+        String id, nome, endereco, telefone;
+        boolean dadosValidos;
+        
+        try{
+            cli = new Cliente(txtNome.getText(), txtId.getText(), txtEndereco.getText(), txtTelefone.getText());
+            dadosValidos = true;
+        }catch(java.lang.IllegalArgumentException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            dadosValidos = false;
+        }
+        
+        
+        
+        
+        if(dadosValidos == true){
+            lblIndice.setText(String.valueOf(LocadoraDados.getClientes().size()));
+            LocadoraDados.cadastraCliente(cli);
+        }
+        
         
         //lblIndice.setText(String.valueOf(LocadoraDados.getClientes().size()-1));
     }//GEN-LAST:event_btnSalvarActionPerformed
