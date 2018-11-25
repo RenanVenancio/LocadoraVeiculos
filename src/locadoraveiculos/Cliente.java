@@ -83,10 +83,10 @@ public class Cliente {
 	
 	public String toString()
 	{
-		return String.format("Nome: %s\n"
-				          + "Identidade: %s\n"
-				          + "Endere�o: %s\n"
-				          + "Telefone: %s\n", getNome(), getID(), getEndereco(), getTel());
+		return String.format("ID: %s\t"
+				          + "NOME: %s     "
+				          + "ENDEREÇO: %s     "
+				          + "TELEFONE: %s     ", getID(), getNome(), getEndereco(), getTel());
 	}
 
 }

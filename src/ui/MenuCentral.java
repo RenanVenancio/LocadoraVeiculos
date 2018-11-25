@@ -35,6 +35,7 @@ public class MenuCentral extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu Locadora");
         setLocation(new java.awt.Point(0, 0));
         setLocationByPlatform(true);
 
@@ -46,8 +47,18 @@ public class MenuCentral extends javax.swing.JFrame {
         });
 
         btVeiculos.setText("Veículos");
+        btVeiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVeiculosActionPerformed(evt);
+            }
+        });
 
         btLocar.setText("Locar");
+        btLocar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLocarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Projeto: METODOLOGIA E LINGUAGEM DE PROGRAMAÇÃO");
 
@@ -96,6 +107,20 @@ public class MenuCentral extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btClientesActionPerformed
 
+    private void btLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLocarActionPerformed
+        locarVeiculo = new LocarVeiculo();
+        locarVeiculo.setLocationRelativeTo(null);  
+        locarVeiculo.setTitle("Locar Veículo");
+        locarVeiculo.setVisible(true);
+    }//GEN-LAST:event_btLocarActionPerformed
+
+    private void btVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVeiculosActionPerformed
+        cadastrarVeiculo = new CadastroDeVeiculos(-1);
+        cadastrarVeiculo.setLocationRelativeTo(null);
+        cadastrarVeiculo.setTitle("Cadastrar Veículo");
+        cadastrarVeiculo.setVisible(true);
+    }//GEN-LAST:event_btVeiculosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -112,6 +137,8 @@ public class MenuCentral extends javax.swing.JFrame {
     }
 
     private CadastroDeCliente cadastroDeCliente;
+    private LocarVeiculo locarVeiculo;
+    private CadastroDeVeiculos cadastrarVeiculo;
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btClientes;

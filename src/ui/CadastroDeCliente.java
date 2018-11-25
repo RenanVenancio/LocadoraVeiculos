@@ -24,6 +24,7 @@ public class CadastroDeCliente extends javax.swing.JFrame {
      */
     public CadastroDeCliente() {
         initComponents();
+        txtId.setText(String.valueOf(LocadoraDados.setIdAuto()));
     }
 
     /**
@@ -52,6 +53,7 @@ public class CadastroDeCliente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        btListaClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -105,6 +107,8 @@ public class CadastroDeCliente extends javax.swing.JFrame {
             }
         });
 
+        txtId.setEditable(false);
+
         jLabel1.setText("Índice:");
 
         lblIndice.setText("(Novo)");
@@ -116,6 +120,13 @@ public class CadastroDeCliente extends javax.swing.JFrame {
         jLabel4.setText("Endereço:");
 
         jLabel5.setText("Telefone:");
+
+        btListaClientes.setText("Listar Clientes");
+        btListaClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListaClientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,20 +141,6 @@ public class CadastroDeCliente extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNovo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                        .addComponent(btnPrimeiro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAnterior)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnProximo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUltimo))
                     .addComponent(txtEndereco)
                     .addComponent(txtTelefone)
                     .addGroup(layout.createSequentialGroup()
@@ -151,8 +148,26 @@ public class CadastroDeCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblIndice)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtId, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(btnNovo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSalvar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btListaClientes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addComponent(btnPrimeiro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAnterior)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnProximo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnUltimo)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -166,7 +181,8 @@ public class CadastroDeCliente extends javax.swing.JFrame {
                     .addComponent(btnAnterior)
                     .addComponent(btnProximo)
                     .addComponent(btnPrimeiro)
-                    .addComponent(btnUltimo))
+                    .addComponent(btnUltimo)
+                    .addComponent(btListaClientes))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -190,11 +206,15 @@ public class CadastroDeCliente extends javax.swing.JFrame {
                 .addContainerGap(110, Short.MAX_VALUE))
         );
 
+        txtId.getAccessibleContext().setAccessibleDescription("A ID do cliente é gerada automaticamente");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        
         limpaCampos();
+        txtId.setText(String.valueOf(LocadoraDados.setIdAuto()));
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -212,10 +232,17 @@ public class CadastroDeCliente extends javax.swing.JFrame {
         
         
         
-        
-        if(dadosValidos == true){
-            lblIndice.setText(String.valueOf(LocadoraDados.getClientes().size()));
-            LocadoraDados.cadastraCliente(cli);
+        if(getIndice() == -1){
+             System.out.println("Adicionar novo cliente");
+             
+            if(dadosValidos == true){
+                lblIndice.setText(String.valueOf(LocadoraDados.getClientes().size()));
+                LocadoraDados.cadastraCliente(cli);
+
+            }
+        }else{
+             System.out.println("Alterar cliente do indice: " + getIndice());
+            LocadoraDados.alteraCliente(getIndice(), cli);
         }
         
         
@@ -294,21 +321,26 @@ public class CadastroDeCliente extends javax.swing.JFrame {
         }
         if((indice >= 0) && (indice <= maxIndice)){
             
-            
+            if(maxIndice>0 && indice < maxIndice){
+                System.out.println("if 0INDICE "+indice);
+                LocadoraDados.removeCliente(indice);  
+                preencheCampos(indice);
+            }
             
             if((indice == 0) && (maxIndice == 0)){
+                 System.out.println("if 1INDICE "+indice);
                 LocadoraDados.removeCliente(indice);               
                 limpaCampos();                
             }
             
             if((indice == 0) && (maxIndice > 0)){
-                System.out.println("if 2INDICE"+indice);
+                System.out.println("if 2INDICE "+indice);
                 LocadoraDados.removeCliente(indice);  
                 preencheCampos(indice);
             }
             
             if((indice == maxIndice) && (maxIndice > 0)){
-                System.out.println("if 2INDICE"+indice);
+                System.out.println("if 3INDICE " +indice);
                 LocadoraDados.removeCliente(indice);  
                 indice --;
                 preencheCampos(indice);
@@ -317,6 +349,12 @@ public class CadastroDeCliente extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btListaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListaClientesActionPerformed
+        listaClientes = new ListaClientes();
+        listaClientes.setVisible(true);
+        listaClientes.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btListaClientesActionPerformed
 
     
     private void preencheCampos(int indice){
@@ -334,6 +372,17 @@ public class CadastroDeCliente extends javax.swing.JFrame {
         txtEndereco.setText("");
         txtTelefone.setText("");
         lblIndice.setText("(Novo)");
+    }
+    
+    private int getIndice(){
+        int indice = -1;
+        try{
+            indice = Integer.parseInt(lblIndice.getText());
+        }catch(NumberFormatException e){
+            
+            return -1;
+        }
+        return indice;
     }
     
     
@@ -371,8 +420,9 @@ public class CadastroDeCliente extends javax.swing.JFrame {
             }
         });
     }
-
+    private ListaClientes listaClientes;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btListaClientes;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
