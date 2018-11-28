@@ -151,7 +151,6 @@ public class LocarVeiculo extends javax.swing.JFrame {
 
         jLabel2.setText("Dias:");
 
-        txtDataInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
         txtDataInicial.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtDataInicialFocusLost(evt);
@@ -167,7 +166,6 @@ public class LocarVeiculo extends javax.swing.JFrame {
 
         jLabel4.setText("Data Final:");
 
-        txtDataFinal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
         txtDataFinal.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtDataFinalFocusLost(evt);
@@ -828,16 +826,25 @@ public class LocarVeiculo extends javax.swing.JFrame {
 
     private void comboVeiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboVeiculoItemStateChanged
         int i = comboVeiculo.getSelectedIndex()-1;
-        try{
+        
+        if(i < 0){
+            i=0;
+        }
+        if(LocadoraDados.getVeiculos().size() <= 0){
+            
+        }else{
+        
+        //try{
             txtValorDiaria.setText(String.valueOf(LocadoraDados.getVeiculos().get(i).getValorDiaria()));
             txtNumPassageiros.setText(String.valueOf(LocadoraDados.getVeiculos().get(i).getPassageiros()));
             txtTipoVeiculo.setText(LocadoraDados.getVeiculos().get(i).getTipo());
             lblPossuiPartida.setText(LocadoraDados.getVeiculos().get(i).getPartida());
             lblcodVeiculo.setText(String.valueOf(LocadoraDados.getVeiculos().get(i).getCodigoAuto()));
-        }catch(ArrayIndexOutOfBoundsException e){
-            
-        }
+        //}catch(ArrayIndexOutOfBoundsException e){
+        //    System.out.println("Erro ao preencher combo");
+       //}
         //preencheCampos(i);
+        }
     }//GEN-LAST:event_comboVeiculoItemStateChanged
 
     private void btNovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovaActionPerformed
