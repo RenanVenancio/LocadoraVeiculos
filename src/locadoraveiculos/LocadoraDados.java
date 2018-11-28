@@ -176,10 +176,10 @@ public class LocadoraDados {
             if(listaLocacoes.get(i).getVeiculo().getCodigoAuto() == cod){
                 
                 podeExcluir = false;
-                System.out.println("Esse não pode");
+               
             }
         }
-        System.out.println("Esse pode");
+       
         return podeExcluir;
         
     }

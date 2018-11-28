@@ -56,7 +56,6 @@ public class CadastroDeCliente extends javax.swing.JFrame {
         btListaClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setFocusTraversalPolicyProvider(true);
         setLocation(new java.awt.Point(0, 0));
 
         btnNovo.setText("Novo");
@@ -312,37 +311,47 @@ public class CadastroDeCliente extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         
-        int minIndice = 0, maxIndice, indice;
-        maxIndice = LocadoraDados.getClientes().size()-1;
-        System.out.print(maxIndice);
-        try{
-            indice = Integer.parseInt(lblIndice.getText());
-        }catch(NumberFormatException e){
-            indice = maxIndice;                        
-        }
-        if((indice >= 0) && (indice <= maxIndice)){
-            
-            if(maxIndice>0 && indice < maxIndice){
-                System.out.println("if 0INDICE "+indice);
-                LocadoraDados.removeCliente(indice);  
-                preencheCampos(indice);
-            }else if((indice == 0) && (maxIndice == 0)){
-                 System.out.println("if 1INDICE "+indice);
-                LocadoraDados.removeCliente(indice);               
-                limpaCampos();                
-            }else if((indice == 0) && (maxIndice > 0)){
-                System.out.println("if 2INDICE "+indice);
-                LocadoraDados.removeCliente(indice);  
-                preencheCampos(indice);
-            }else if((indice == maxIndice) && (maxIndice > 0)){
-                System.out.println("if 3INDICE " +indice);
-                LocadoraDados.removeCliente(indice);  
-                indice --;
-                preencheCampos(indice);
+        if(lblIndice.getText().equals("(Novo)")){
+            JOptionPane.showMessageDialog(null, "Não há nada para excluir");
+        }else{
+        
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir esse registro?", "Receber", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {    
+
+
+                int minIndice = 0, maxIndice, indice;
+                maxIndice = LocadoraDados.getClientes().size()-1;
+                System.out.print(maxIndice);
+                try{
+                    indice = Integer.parseInt(lblIndice.getText());
+                }catch(NumberFormatException e){
+                    indice = maxIndice;                        
+                }
+                if((indice >= 0) && (indice <= maxIndice)){
+
+                    if(maxIndice>0 && indice < maxIndice){
+                        System.out.println("if 0INDICE "+indice);
+                        LocadoraDados.removeCliente(indice);  
+                        preencheCampos(indice);
+                    }else if((indice == 0) && (maxIndice == 0)){
+                         System.out.println("if 1INDICE "+indice);
+                        LocadoraDados.removeCliente(indice);               
+                        limpaCampos();                
+                    }else if((indice == 0) && (maxIndice > 0)){
+                        System.out.println("if 2INDICE "+indice);
+                        LocadoraDados.removeCliente(indice);  
+                        preencheCampos(indice);
+                    }else if((indice == maxIndice) && (maxIndice > 0)){
+                        System.out.println("if 3INDICE " +indice);
+                        LocadoraDados.removeCliente(indice);  
+                        indice --;
+                        preencheCampos(indice);
+                    }
+                }
+            }else{
+
             }
         }
-        
-        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btListaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListaClientesActionPerformed

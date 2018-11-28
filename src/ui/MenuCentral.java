@@ -109,7 +109,7 @@ public class MenuCentral extends javax.swing.JFrame {
         System.out.println("JANELA FECHADA");
         cadastroDeCliente.setTitle("Cadastro de Clientes");
         cadastroDeCliente.setLocationRelativeTo(null); 
-        cadastroDeCliente.setAlwaysOnTop(true);
+        
         cadastroDeCliente.setVisible(true);
             
        
@@ -167,6 +167,9 @@ public class MenuCentral extends javax.swing.JFrame {
         LocadoraDados.cadastraCliente(cliente);  
         
         cliente = new Cliente("JEFFERSON ANDRÉ DA SILVA", "2", "RUA IEDA RODRIGUES DA ROCHA - CENTRO - MOSSORÓ - RN", "9000-0000");
+        LocadoraDados.cadastraCliente(cliente);
+        
+        cliente = new Cliente("UNIPE - CENTRO UNIVERSITÁRIO DE JOÃO PESSOA", "3", "BR 230 - JOÃO PESSOA - PB", "9000-0000");
         LocadoraDados.cadastraCliente(cliente);
     }
 

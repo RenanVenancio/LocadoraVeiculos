@@ -898,44 +898,53 @@ public class LocarVeiculo extends javax.swing.JFrame {
     
     
     private void btExcliurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcliurActionPerformed
-                
         if(lblIndice.getText().equals("(Novo)")){
-            
+            JOptionPane.showMessageDialog(null, "Não há nada para excluir");
         }else{
         
-            int minIndice = 0, maxIndice, indice;
-            maxIndice = LocadoraDados.getVeiculos().size()-1;
-            System.out.print(maxIndice);
-            try{
-                indice = Integer.parseInt(lblIndice.getText());
-            }catch(NumberFormatException e){
-                indice = maxIndice;                        
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir esse registro?", "Receber", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {                
+                if(lblIndice.getText().equals("(Novo)")){
+
+                }else{
+
+                    int minIndice = 0, maxIndice, indice;
+                    maxIndice = LocadoraDados.getVeiculos().size()-1;
+                    System.out.print(maxIndice);
+                    try{
+                        indice = Integer.parseInt(lblIndice.getText());
+                    }catch(NumberFormatException e){
+                        indice = maxIndice;                        
+                    }
+                    if((indice >= 0) && (indice <= maxIndice)){
+
+                        if(maxIndice>0 && indice < maxIndice){
+                            DisponibilizaVeiculo();
+                            LocadoraDados.removeLocacao(indice);  
+                            limpaCampos();   
+                        }
+
+                        if((indice == 0) && (maxIndice == 0)){
+                            DisponibilizaVeiculo();
+                            LocadoraDados.removeLocacao(indice);               
+                            limpaCampos();                
+                        }
+
+
+
+                        if((indice == maxIndice) && (maxIndice > 0)){
+                            DisponibilizaVeiculo();
+                            LocadoraDados.removeLocacao(indice);  
+                            indice --;
+                            preencheCampos(indice);
+                        }
+                    }
+
+                } 
+            }else{
+
             }
-            if((indice >= 0) && (indice <= maxIndice)){
-
-                if(maxIndice>0 && indice < maxIndice){
-                    DisponibilizaVeiculo();
-                    LocadoraDados.removeLocacao(indice);  
-                    limpaCampos();   
-                }
-
-                if((indice == 0) && (maxIndice == 0)){
-                    DisponibilizaVeiculo();
-                    LocadoraDados.removeLocacao(indice);               
-                    limpaCampos();                
-                }
-
-
-
-                if((indice == maxIndice) && (maxIndice > 0)){
-                    DisponibilizaVeiculo();
-                    LocadoraDados.removeLocacao(indice);  
-                    indice --;
-                    preencheCampos(indice);
-                }
-            }
-        
-        } 
+        }
     }//GEN-LAST:event_btExcliurActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1004,6 +1013,9 @@ public class LocarVeiculo extends javax.swing.JFrame {
         lblIndice.setText("(Novo)");
         lblStatus.setText("(Não Definido)");
         lblcodVeiculo.setText("");
+        comboCliente.setSelectedIndex(0);
+        comboVeiculo.setSelectedIndex(0);
+        lblCli.setText("");
        
         
     }

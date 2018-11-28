@@ -447,48 +447,56 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         
-       
-        
-        int minIndice = 0, maxIndice, indice, codigo = -1;
-        maxIndice = LocadoraDados.getVeiculos().size()-1;
-        
-        try{
-            indice = Integer.parseInt(lblIndice.getText());
-            codigo = Integer.parseInt(lblCodigo.getText());
-        }catch(NumberFormatException e){
-            indice = maxIndice;                        
-        }
-        
-        if(LocadoraDados.verificaExclusaoVeiculo(codigo) == true){
-        
-            if((indice >= 0) && (indice <= maxIndice)){
-
-                if(maxIndice>0 && indice < maxIndice){
-                    LocadoraDados.removeVeiculo(indice);  
-                    preencheCampos(indice);
-                    System.out.println("IF 1");
-                }else if((indice == 0) && (maxIndice == 0)){
-                    LocadoraDados.removeVeiculo(indice);               
-                    limpaCampos(); 
-                    System.out.println("IF 2");
-                }else if((indice == 0) && (maxIndice > 0)){
-
-                    LocadoraDados.removeVeiculo(indice);  
-                    preencheCampos(indice);
-                    System.out.println("IF 3");
-                }else if((indice == maxIndice) && (maxIndice > 0)){
-
-                    LocadoraDados.removeVeiculo(indice);  
-                    indice --;
-                    preencheCampos(indice);
-                    System.out.println("IF 4");
-                }
-            }
+        if(lblIndice.getText().equals("(Novo)")){
+            JOptionPane.showMessageDialog(null, "Não há nada para excluir");
         }else{
-            JOptionPane.showMessageDialog(null, "Desculpe, esse veiculo não pode ser excluido, pois existem alugueis vinculados a ale");
+        
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir esse registro?", "Receber", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {    
+
+
+                int minIndice = 0, maxIndice, indice, codigo = -1;
+                maxIndice = LocadoraDados.getVeiculos().size()-1;
+
+                try{
+                    indice = Integer.parseInt(lblIndice.getText());
+                    codigo = Integer.parseInt(lblCodigo.getText());
+                }catch(NumberFormatException e){
+                    indice = maxIndice;                        
+                }
+
+                if(LocadoraDados.verificaExclusaoVeiculo(codigo) == true){
+
+                    if((indice >= 0) && (indice <= maxIndice)){
+
+                        if(maxIndice>0 && indice < maxIndice){
+                            LocadoraDados.removeVeiculo(indice);  
+                            preencheCampos(indice);
+                            
+                        }else if((indice == 0) && (maxIndice == 0)){
+                            LocadoraDados.removeVeiculo(indice);               
+                            limpaCampos(); 
+                            
+                        }else if((indice == 0) && (maxIndice > 0)){
+
+                            LocadoraDados.removeVeiculo(indice);  
+                            preencheCampos(indice);
+                            
+                        }else if((indice == maxIndice) && (maxIndice > 0)){
+
+                            LocadoraDados.removeVeiculo(indice);  
+                            indice --;
+                            preencheCampos(indice);
+                            
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Desculpe, esse veiculo não pode ser excluido, pois existem alugueis vinculados a ale");
+                }
+            }else{
+
+            }
         }
-        
-        
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
