@@ -33,6 +33,9 @@ public class LocarVeiculo extends javax.swing.JFrame {
       
         initComponents();
         
+        comboCliente.addItem("");
+        comboVeiculo.addItem("");
+        
         for (int i=0; i < LocadoraDados.getClientes().size(); i++) {            
          comboCliente.addItem(LocadoraDados.getClientes().get(i).getNome()+ " | " + String.valueOf(LocadoraDados.getClientes().get(i).getID())); 
          
@@ -112,8 +115,23 @@ public class LocarVeiculo extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JSeparator();
         jLabel19 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
+        lblcodVeiculo = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowDeactivated(java.awt.event.WindowEvent evt) {
+                formWindowDeactivated(evt);
+            }
+        });
 
         comboCliente.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -134,6 +152,11 @@ public class LocarVeiculo extends javax.swing.JFrame {
         jLabel2.setText("Dias:");
 
         txtDataInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        txtDataInicial.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDataInicialFocusLost(evt);
+            }
+        });
         txtDataInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDataInicialActionPerformed(evt);
@@ -285,7 +308,7 @@ public class LocarVeiculo extends javax.swing.JFrame {
 
         jLabel13.setText("Status:");
 
-        lblStatus.setText("(Não Deifinido)");
+        lblStatus.setText("(Não Definido)");
 
         jLabel14.setText("Dados do Cliente");
 
@@ -364,17 +387,18 @@ public class LocarVeiculo extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btProximo)
-                    .addComponent(btAnterior)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15)
                         .addComponent(jLabel16)
                         .addComponent(lblTotalSeguro)
                         .addComponent(jLabel18)
                         .addComponent(lblDescontoReal)
-                        .addComponent(lblTotalDiaria)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                        .addComponent(lblTotalDiaria))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btProximo)
+                        .addComponent(btAnterior)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -384,6 +408,10 @@ public class LocarVeiculo extends javax.swing.JFrame {
         );
 
         jLabel19.setText("Dados do aluguel");
+
+        lblcodVeiculo.setText(" ");
+
+        jLabel21.setText("Código:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -419,7 +447,11 @@ public class LocarVeiculo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel21)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblcodVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(comboVeiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -428,12 +460,10 @@ public class LocarVeiculo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNumPassageiros, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(txtNumPassageiros, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btCadastro)
                         .addContainerGap())
-                    .addComponent(lblCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel12)
@@ -458,8 +488,8 @@ public class LocarVeiculo extends javax.swing.JFrame {
                                         .addComponent(jLabel4)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtDataFinal)
-                                    .addComponent(txtValorSeguro, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))
+                                    .addComponent(txtDataFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                                    .addComponent(txtValorSeguro))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
@@ -480,17 +510,19 @@ public class LocarVeiculo extends javax.swing.JFrame {
                                 .addComponent(comboCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(10, 10, 10))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lblCli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(lblIndice)
@@ -523,7 +555,9 @@ public class LocarVeiculo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(comboVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCadastro))
+                    .addComponent(btCadastro)
+                    .addComponent(lblcodVeiculo)
+                    .addComponent(jLabel21))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -581,6 +615,15 @@ public class LocarVeiculo extends javax.swing.JFrame {
     private void txtDataFinalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataFinalFocusLost
         //23/11/2018
         
+        calculaDatas();
+        
+        
+        
+    }//GEN-LAST:event_txtDataFinalFocusLost
+
+    
+    private void calculaDatas(){
+         
         try{
             int di, mi, ai;
             di = Integer.parseInt(txtDataInicial.getText().substring(0, 2));
@@ -599,11 +642,16 @@ public class LocarVeiculo extends javax.swing.JFrame {
             LocalDate fim = LocalDate.of(af, mf, df);
             int intervalo = (int) ChronoUnit.DAYS.between(inicio, fim);
             
+            
             if(intervalo < 0){
                 JOptionPane.showMessageDialog(null, "A data inicial deve ser menor que a final");
                 txtDias.setText("");
             }else{
                 txtDias.setText(String.valueOf(intervalo));
+            }
+            
+            if(intervalo <= 0){
+                intervalo = 1;
             }
             
             
@@ -613,24 +661,27 @@ public class LocarVeiculo extends javax.swing.JFrame {
         }catch(java.time.DateTimeException e){
             JOptionPane.showMessageDialog(null, "Formato de data inválido");
             txtDias.setText("");
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Formato de data inválido");
         }
-        
-        
-        
-    }//GEN-LAST:event_txtDataFinalFocusLost
-
+    }
+    
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        int i = comboCliente.getSelectedIndex();
+        int i = comboCliente.getSelectedIndex()-1;
         int indiceLoc = LocadoraDados.getLocacao().size();
         
         boolean dadosValidos;
         LocacaoVeiculo loc = null;
-        int j = comboVeiculo.getSelectedIndex();
+        int j = comboVeiculo.getSelectedIndex()-1;
         
         if(LocadoraDados.getClientes().size() == 0){
             JOptionPane.showMessageDialog(null, "Cadastre um cliente e tente novamente");
         }else if(LocadoraDados.getVeiculos().size() == 0){
-            JOptionPane.showMessageDialog(null, "Cadastre um veículo e tente novamente");        
+            JOptionPane.showMessageDialog(null, "Cadastre um veículo e tente novamente");  
+        }else if(comboCliente.getSelectedItem().toString().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Selecione um cliente");
+        }else if(comboVeiculo.getSelectedItem().toString().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Selecione um veiculo"); 
         }else{
         
         
@@ -659,7 +710,7 @@ public class LocarVeiculo extends javax.swing.JFrame {
             );
             
                 
-                try{ 
+           try{ 
                 loc = new LocacaoVeiculo(veiculo,
                                          cli,
                                          txtValorDiaria.getText(),
@@ -678,29 +729,41 @@ public class LocarVeiculo extends javax.swing.JFrame {
                dadosValidos = false;
            }
           
-           if(dadosValidos == true){     
-                try{
-                     if(LocadoraDados.getVeiculos().get(j).isDisponivel() == false){
-                        throw new IllegalArgumentException("Este veículo não está disponível");
+             
 
-                     }else{
-                         LocadoraDados.baixaVeiculo(j);
-                     }
-                 }catch(IllegalArgumentException e){
-                     JOptionPane.showMessageDialog(null, e.getMessage());
-                     dadosValidos = false;
-                 }
-            }    
-
-           if(dadosValidos == true){
+           if((getIndice() == -1) && (dadosValidos == true)){  //Adiciona uma nova locação
+               try{
+                    LocadoraDados.cadastraLocacao(loc);
+                    lblIndice.setText(String.valueOf(LocadoraDados.getLocacao().size()));
+                    preencheCampos(indiceLoc);
+               }catch(IllegalArgumentException e){
+                   JOptionPane.showMessageDialog(null, e.getMessage());
+               }
+           }else if (getIndice() >= 0){
                
-               LocadoraDados.cadastraLocacao(loc);
-               lblIndice.setText(String.valueOf(LocadoraDados.getLocacao().size()));
-               preencheCampos(indiceLoc);
+                try{
+                    System.out.println("Altere o veículo indice:" + getIndice());
+                    LocadoraDados.alteraLocacao(getIndice(), loc);
+                    preencheCampos(getIndice());
+                }catch(IllegalArgumentException e){
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }catch(NullPointerException e){
+                    System.out.println("ERRO DE NULLPOINTER INDICE DE LOCACAO "+  getIndice());
+                }
            }
         }
     }//GEN-LAST:event_btSalvarActionPerformed
 
+    
+    public int getCodVeiculo(){
+        int codVeiculo = -1;
+        try{
+            codVeiculo =  Integer.parseInt(lblcodVeiculo.getText());
+        }catch(NumberFormatException e){
+            codVeiculo = -1;         
+        }
+        return codVeiculo;
+    }
     
     
     /**
@@ -764,12 +827,16 @@ public class LocarVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_btAnteriorActionPerformed
 
     private void comboVeiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboVeiculoItemStateChanged
-        int i = comboVeiculo.getSelectedIndex();
-        
-        txtValorDiaria.setText(String.valueOf(LocadoraDados.getVeiculos().get(i).getValorDiaria()));
-        txtNumPassageiros.setText(String.valueOf(LocadoraDados.getVeiculos().get(i).getPassageiros()));
-        txtTipoVeiculo.setText(LocadoraDados.getVeiculos().get(i).getTipo());
-        lblPossuiPartida.setText(LocadoraDados.getVeiculos().get(i).getPartida());
+        int i = comboVeiculo.getSelectedIndex()-1;
+        try{
+            txtValorDiaria.setText(String.valueOf(LocadoraDados.getVeiculos().get(i).getValorDiaria()));
+            txtNumPassageiros.setText(String.valueOf(LocadoraDados.getVeiculos().get(i).getPassageiros()));
+            txtTipoVeiculo.setText(LocadoraDados.getVeiculos().get(i).getTipo());
+            lblPossuiPartida.setText(LocadoraDados.getVeiculos().get(i).getPartida());
+            lblcodVeiculo.setText(String.valueOf(LocadoraDados.getVeiculos().get(i).getCodigoAuto()));
+        }catch(ArrayIndexOutOfBoundsException e){
+            
+        }
         //preencheCampos(i);
     }//GEN-LAST:event_comboVeiculoItemStateChanged
 
@@ -782,7 +849,7 @@ public class LocarVeiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_comboVeiculoActionPerformed
 
     private void btCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroActionPerformed
-        cadastroDeVeiculos = new CadastroDeVeiculos(comboVeiculo.getSelectedIndex());
+        cadastroDeVeiculos = new CadastroDeVeiculos(LocadoraDados.localizaVeiculoPorCodigo(getCodVeiculo()));
         cadastroDeVeiculos.setVisible(true);
         cadastroDeVeiculos.setLocationRelativeTo(null);
     }//GEN-LAST:event_btCadastroActionPerformed
@@ -805,20 +872,18 @@ public class LocarVeiculo extends javax.swing.JFrame {
         
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente confirmar o recebimento do veículo?", "Receber", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
-                if(checaStatusLocacao()){
-                    LocadoraDados.getLocacao().get(getIndice()).setStatus("RECEBIDO");
-                    int indiceVeiculo = LocadoraDados.localizaVeiculoPorCodigo(LocadoraDados.getLocacao().get(getIndice()).getVeiculo().getCodigoAuto());  //Pegando o código do veiculo
-                    if(indiceVeiculo == -1){
-                        
-                    }else{
-                        LocadoraDados.getVeiculos().get(indiceVeiculo).setDisponivel(true);
-                    }
+                
+                
+                try{
+                    LocadoraDados.baixarLocacao(getIndice());
                     preencheCampos(getIndice());
-                }else{
-                    //CASO FALSE
+                }catch(IllegalArgumentException e){
+                    JOptionPane.showMessageDialog(null, e.getMessage());
                 }
+                
             }
         }
+        
     }//GEN-LAST:event_btReceberActionPerformed
 
     private void DisponibilizaVeiculo(){
@@ -879,6 +944,54 @@ public class LocarVeiculo extends javax.swing.JFrame {
         listarLocacoes.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+      
+    }//GEN-LAST:event_formFocusGained
+
+    private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
+        System.out.println("Janela de alugar perdeu o foco");
+    }//GEN-LAST:event_formWindowDeactivated
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        
+        System.out.println("Janela de alugar ganhou o foco: Recarregendo combobox");
+        
+        int indiceCli = comboCliente.getSelectedIndex();
+        int indiceVeiculo = comboVeiculo.getSelectedIndex();
+        
+        comboCliente.removeAllItems();
+        comboVeiculo.removeAllItems();
+        
+        comboCliente.addItem("");
+        comboVeiculo.addItem("");
+        
+        for (int i=0; i < LocadoraDados.getClientes().size(); i++) {            
+         comboCliente.addItem(LocadoraDados.getClientes().get(i).getNome()+ " | " + String.valueOf(LocadoraDados.getClientes().get(i).getID())); 
+         
+        }
+        
+        for (int i=0; i < LocadoraDados.getVeiculos().size(); i++) {            
+         comboVeiculo.addItem(LocadoraDados.getVeiculos().get(i).getDescricao()+ " | " + String.valueOf(LocadoraDados.getVeiculos().get(i).getCodigoAuto())); 
+         
+        }
+        
+        if(getIndice() == -1){
+        comboCliente.setSelectedIndex(indiceCli);
+        comboVeiculo.setSelectedIndex(indiceVeiculo);
+        }else{
+         comboVeiculo.setSelectedItem(LocadoraDados.getLocacao().get(getIndice()).getVeiculo().getDescricao()+ " | " + String.valueOf(LocadoraDados.getLocacao().get(getIndice()).getVeiculo().getCodigoAuto()));
+         comboCliente.setSelectedItem(LocadoraDados.getLocacao().get(getIndice()).getCliente().getNome() +" | " +LocadoraDados.getLocacao().get(getIndice()).getCliente().getID());
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    private void txtDataInicialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataInicialFocusLost
+        if(txtDataFinal.getText().isEmpty()){
+            
+        }else{
+            calculaDatas();
+        }
+    }//GEN-LAST:event_txtDataInicialFocusLost
+
     private void limpaCampos(){
         
         txtDataInicial.setText(null);
@@ -890,6 +1003,7 @@ public class LocarVeiculo extends javax.swing.JFrame {
         txtValorTotal.setText("0,00");
         lblIndice.setText("(Novo)");
         lblStatus.setText("(Não Definido)");
+        lblcodVeiculo.setText("");
        
         
     }
@@ -924,6 +1038,7 @@ public class LocarVeiculo extends javax.swing.JFrame {
         txtValorSeguro.setText(String.valueOf(df.format(LocadoraDados.getLocacao().get(indice).getValorSeguro())));  //O valor é arredondado
         txtValorDesconto.setText(String.valueOf(df.format(LocadoraDados.getLocacao().get(indice).getDesconto()))); //O valor é arredondado
         lblStatus.setText(LocadoraDados.getLocacao().get(indice).getStatus());
+        lblcodVeiculo.setText(String.valueOf(LocadoraDados.getLocacao().get(indice).getVeiculo().getCodigoAuto()));
         
         double totalDia = LocadoraDados.getLocacao().get(indice).getValorDiaria() * LocadoraDados.getLocacao().get(indice).getDias();
         double totalSeguro = LocadoraDados.getLocacao().get(indice).getValorSeguro() * LocadoraDados.getLocacao().get(indice).getDias();
@@ -995,6 +1110,7 @@ public class LocarVeiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1019,6 +1135,7 @@ public class LocarVeiculo extends javax.swing.JFrame {
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTotalDiaria;
     private javax.swing.JLabel lblTotalSeguro;
+    private javax.swing.JLabel lblcodVeiculo;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicial;
     private javax.swing.JTextField txtDias;

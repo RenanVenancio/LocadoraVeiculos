@@ -5,6 +5,10 @@
  */
 package ui;
 
+import locadoraveiculos.Cliente;
+import locadoraveiculos.LocadoraDados;
+import locadoraveiculos.Veiculo;
+
 /**
  *
  * @author renan
@@ -98,12 +102,19 @@ public class MenuCentral extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+      
     private void btClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClientesActionPerformed
+        
         cadastroDeCliente = new CadastroDeCliente();
+        System.out.println("JANELA FECHADA");
         cadastroDeCliente.setTitle("Cadastro de Clientes");
-        cadastroDeCliente.setLocationRelativeTo(null);  
+        cadastroDeCliente.setLocationRelativeTo(null); 
+        cadastroDeCliente.setAlwaysOnTop(true);
         cadastroDeCliente.setVisible(true);
+            
+       
+          
+        
         
     }//GEN-LAST:event_btClientesActionPerformed
 
@@ -132,8 +143,31 @@ public class MenuCentral extends javax.swing.JFrame {
         menuCentral = new MenuCentral();
         menuCentral.setLocationRelativeTo(null);  
         menuCentral.setVisible(true);
-                
-          
+        
+        
+        Veiculo veiculo = new Veiculo("0", "CARRO", "50.00", "FOX 2016 4P FLEX PRETO", "MOS3422", "4", "SIM", "WOLKSWAGEN", true);
+        LocadoraDados.cadastraVeiculo(veiculo);
+        
+        veiculo = new Veiculo("0", "CARRO", "30.00", "UNO 2P BRANCO 2009", "RES0021", "4", "SIM", "FIAT", true);
+        LocadoraDados.cadastraVeiculo(veiculo);
+        
+        veiculo = new Veiculo("0", "MOTO", "34.00", "CG TITTAN 160 2016 PRETA", "UNH8906", "2", "NÃO", "HONDA", true);
+        LocadoraDados.cadastraVeiculo(veiculo);
+        
+        veiculo = new Veiculo("0", "CARRO", "120.00", "DOBLO PRATA 2017", "KDK8675", "8", "SIM", "FIAT", true);
+        LocadoraDados.cadastraVeiculo(veiculo);
+        
+        veiculo = new Veiculo("0", "MOTO", "18.00", "POP 100 LARANJA 2012", "UNH86000", "2", "NÃO", "HONDA", true);
+        LocadoraDados.cadastraVeiculo(veiculo);
+        
+        veiculo = new Veiculo("0", "CARRO", "110.00", "SPIN BRANCA 2015 CB AUTOMATICO", "RVE3712", "7", "SIM", "CHEVROLET", true);
+        LocadoraDados.cadastraVeiculo(veiculo);
+         
+        Cliente cliente = new Cliente("ANA PAULA RODRIGUES", "1", "RUA JOÃO MARIA DE ARAUJO - CENTRO - JOÃO PESSOA - PB", "9932-3344");
+        LocadoraDados.cadastraCliente(cliente);  
+        
+        cliente = new Cliente("JEFFERSON ANDRÉ DA SILVA", "2", "RUA IEDA RODRIGUES DA ROCHA - CENTRO - MOSSORÓ - RN", "9000-0000");
+        LocadoraDados.cadastraCliente(cliente);
     }
 
     private CadastroDeCliente cadastroDeCliente;

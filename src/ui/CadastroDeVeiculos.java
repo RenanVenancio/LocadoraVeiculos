@@ -22,10 +22,12 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
      */
     public CadastroDeVeiculos(int indice) {
         initComponents();
+        
+        
         if (indice == -1){
             cbDisponivel.setSelected(true);
             ajustarCampos();
-            lblCodigo.setText(String.valueOf(LocadoraDados.setCodigoAuto()));
+            lblCodigo.setText(String.valueOf(LocadoraDados.setCodigoAutomatico()));
         }else{
             preencheCampos(indice);
         }
@@ -279,6 +281,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
 
     private void cbTipoVeiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoVeiculoItemStateChanged
         ajustarCampos();
+        
     }//GEN-LAST:event_cbTipoVeiculoItemStateChanged
 
     private void preencheCampos(int indice){
@@ -399,9 +402,22 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btSalvarActionPerformed
 
+    private int getCodigo(){
+        int codigo = -1;
+        try{
+            
+            codigo = Integer.parseInt(lblCodigo.getText());
+        }catch(NumberFormatException e){
+            
+            return -1;
+        }
+        return codigo;
+    }
+    
     private int getIndice(){
         int indice = -1;
         try{
+            
             indice = Integer.parseInt(lblIndice.getText());
         }catch(NumberFormatException e){
             
@@ -431,38 +447,45 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         
-        int minIndice = 0, maxIndice, indice;
+       
+        
+        int minIndice = 0, maxIndice, indice, codigo = -1;
         maxIndice = LocadoraDados.getVeiculos().size()-1;
-        System.out.print(maxIndice);
+        
         try{
             indice = Integer.parseInt(lblIndice.getText());
+            codigo = Integer.parseInt(lblCodigo.getText());
         }catch(NumberFormatException e){
             indice = maxIndice;                        
         }
-        if((indice >= 0) && (indice <= maxIndice)){
-            
-            if(maxIndice>0 && indice < maxIndice){
-                LocadoraDados.removeVeiculo(indice);  
-                preencheCampos(indice);
+        
+        if(LocadoraDados.verificaExclusaoVeiculo(codigo) == true){
+        
+            if((indice >= 0) && (indice <= maxIndice)){
+
+                if(maxIndice>0 && indice < maxIndice){
+                    LocadoraDados.removeVeiculo(indice);  
+                    preencheCampos(indice);
+                    System.out.println("IF 1");
+                }else if((indice == 0) && (maxIndice == 0)){
+                    LocadoraDados.removeVeiculo(indice);               
+                    limpaCampos(); 
+                    System.out.println("IF 2");
+                }else if((indice == 0) && (maxIndice > 0)){
+
+                    LocadoraDados.removeVeiculo(indice);  
+                    preencheCampos(indice);
+                    System.out.println("IF 3");
+                }else if((indice == maxIndice) && (maxIndice > 0)){
+
+                    LocadoraDados.removeVeiculo(indice);  
+                    indice --;
+                    preencheCampos(indice);
+                    System.out.println("IF 4");
+                }
             }
-            
-            if((indice == 0) && (maxIndice == 0)){
-                LocadoraDados.removeVeiculo(indice);               
-                limpaCampos();                
-            }
-            
-            if((indice == 0) && (maxIndice > 0)){
-                
-                LocadoraDados.removeVeiculo(indice);  
-                preencheCampos(indice);
-            }
-            
-            if((indice == maxIndice) && (maxIndice > 0)){
-                
-                LocadoraDados.removeVeiculo(indice);  
-                indice --;
-                preencheCampos(indice);
-            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Desculpe, esse veiculo não pode ser excluido, pois existem alugueis vinculados a ale");
         }
         
         
@@ -470,7 +493,7 @@ public class CadastroDeVeiculos extends javax.swing.JFrame {
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
         limpaCampos();
-        lblCodigo.setText(String.valueOf(LocadoraDados.setCodigoAuto()));
+        lblCodigo.setText(String.valueOf(LocadoraDados.setCodigoAutomatico()));
         
     }//GEN-LAST:event_btNovoActionPerformed
 

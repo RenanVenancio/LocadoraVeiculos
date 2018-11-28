@@ -56,6 +56,7 @@ public class CadastroDeCliente extends javax.swing.JFrame {
         btListaClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setFocusTraversalPolicyProvider(true);
         setLocation(new java.awt.Point(0, 0));
 
         btnNovo.setText("Novo");
@@ -325,21 +326,15 @@ public class CadastroDeCliente extends javax.swing.JFrame {
                 System.out.println("if 0INDICE "+indice);
                 LocadoraDados.removeCliente(indice);  
                 preencheCampos(indice);
-            }
-            
-            if((indice == 0) && (maxIndice == 0)){
+            }else if((indice == 0) && (maxIndice == 0)){
                  System.out.println("if 1INDICE "+indice);
                 LocadoraDados.removeCliente(indice);               
                 limpaCampos();                
-            }
-            
-            if((indice == 0) && (maxIndice > 0)){
+            }else if((indice == 0) && (maxIndice > 0)){
                 System.out.println("if 2INDICE "+indice);
                 LocadoraDados.removeCliente(indice);  
                 preencheCampos(indice);
-            }
-            
-            if((indice == maxIndice) && (maxIndice > 0)){
+            }else if((indice == maxIndice) && (maxIndice > 0)){
                 System.out.println("if 3INDICE " +indice);
                 LocadoraDados.removeCliente(indice);  
                 indice --;

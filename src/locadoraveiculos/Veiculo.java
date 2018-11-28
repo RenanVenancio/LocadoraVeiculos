@@ -47,9 +47,16 @@ public class Veiculo {
             valorDiaria = valorDiaria.replaceAll(",", ".");
             double valorDiariaConv = Double.parseDouble(valorDiaria);
             this.valorDiaria = valorDiariaConv;
+            
+            if(valorDiariaConv < 0){
+                throw new IllegalArgumentException("O Valor da diária deve ser um valor positivo");
+            }
+            
         }catch(NumberFormatException e){
             throw new IllegalArgumentException("O valor da diária é inválido");
         }
+        
+        
         
         
         
@@ -91,6 +98,11 @@ public class Veiculo {
         try{
             passageirosConv = Integer.parseInt(passageiros);
             this.passageiros = passageirosConv;
+            
+             if(passageirosConv < 1){
+                throw new IllegalArgumentException("O número de passageiros não é válido");
+            }
+            
         }catch(NumberFormatException e){
             throw new IllegalArgumentException("O número de passageiros deve ser um número inteiro");
         }
