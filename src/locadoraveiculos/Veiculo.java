@@ -50,6 +50,8 @@ public class Veiculo {
             
             if(valorDiariaConv < 0){
                 throw new IllegalArgumentException("O Valor da diária deve ser um valor positivo");
+            }else if(valorDiariaConv > 1000000){
+                throw new IllegalArgumentException("O Valor da diária está incorreto");
             }
             
         }catch(NumberFormatException e){
@@ -99,8 +101,8 @@ public class Veiculo {
             passageirosConv = Integer.parseInt(passageiros);
             this.passageiros = passageirosConv;
             
-             if(passageirosConv < 1){
-                throw new IllegalArgumentException("O número de passageiros não é válido");
+            if((passageirosConv >= 100) || (passageirosConv <= 0)){
+                throw new IllegalArgumentException("O número de passageiros não é válido: Informe um numero entre 1 e 100");
             }
             
         }catch(NumberFormatException e){

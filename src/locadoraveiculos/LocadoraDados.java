@@ -144,6 +144,7 @@ public class LocadoraDados {
     public static void cadastraVeiculo(Veiculo veiculo){
         veiculo.setCodigoAuto(String.valueOf(setCodigoAutomatico()));
         listaVeiculos.add(veiculo);
+        alinharDados();
     }
     
     /**
@@ -241,6 +242,7 @@ public class LocadoraDados {
     
     public static void alteraVeiculo(int indice, Veiculo veiculo){
         listaVeiculos.set(indice, veiculo);
+        alinharDados();
     }
     
     /**

@@ -192,11 +192,10 @@ public class LocacaoVeiculo {
                 df.setRoundingMode(RoundingMode.HALF_UP);
 	
 		if(veiculo.getTipo().equals("CARRO") && (possuiSeguro == true)){
-                         System.out.println("Calculando valor do seguro do carro");
+                        
 			 valorSeguro =  (0.05 * valorDiaria * (1.0 + veiculo.getPassageiros()/20.0));
-                         System.out.println("PASSAGEIROS:" + veiculo.getPassageiros());
-                         System.out.println("DIARIA:" + valorDiaria);
-                         System.out.println("PASSAGEIROS SEGURO:" + df.format(0.05 * valorDiaria * (1.0 + veiculo.getPassageiros()/20.0)));
+                         
+                        
 		}
                 else if(veiculo.getTipo().equals("MOTO") && (possuiSeguro == true))
 		{       System.out.println("Calculando valor do seguro da moto");

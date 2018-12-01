@@ -50,21 +50,7 @@ public class Cliente {
 	}
 	
 	public void setTel(String tel) {
-            
-            long telApenasNumeros=0;
-            
-            
-            try{
-                telApenasNumeros = Long.parseLong(tel);
-                
-            }catch(NumberFormatException e){
-               
-            }
-            if(telApenasNumeros < 0){
-                throw new IllegalArgumentException("O telefone não é válido");
-            }
-            
-		
+           
             if(tel.isEmpty()){
                 throw new IllegalArgumentException("Por favor, informe um telefone para contato");
             }else{
